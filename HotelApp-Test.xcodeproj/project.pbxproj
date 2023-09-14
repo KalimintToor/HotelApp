@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F30FB7C2AB3350F00DF71EF /* .gitigmore in Resources */ = {isa = PBXBuildFile; fileRef = 1F30FB7B2AB3350F00DF71EF /* .gitigmore */; };
 		1F4D62632AAF262200571404 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D62622AAF262200571404 /* AppDelegate.swift */; };
 		1F4D62652AAF262200571404 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D62642AAF262200571404 /* SceneDelegate.swift */; };
 		1F4D62672AAF262200571404 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D62662AAF262200571404 /* ViewController.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F30FB7B2AB3350F00DF71EF /* .gitigmore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitigmore; sourceTree = "<group>"; };
 		1F4D625F2AAF262200571404 /* HotelApp-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HotelApp-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F4D62622AAF262200571404 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1F4D62642AAF262200571404 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		1F4D62562AAF262200571404 = {
 			isa = PBXGroup;
 			children = (
+				1F30FB7B2AB3350F00DF71EF /* .gitigmore */,
 				1F4D62612AAF262200571404 /* HotelApp-Test */,
 				1F4D62782AAF262900571404 /* HotelApp-TestTests */,
 				1F4D62832AAF262900571404 /* HotelApp-TestUITests */,
@@ -351,6 +354,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F30FB7C2AB3350F00DF71EF /* .gitigmore in Resources */,
 				1F8926B52AB2020F0096768B /* HotelRoom.storyboard in Resources */,
 				1F4D626F2AAF262800571404 /* LaunchScreen.storyboard in Resources */,
 				1F4D626C2AAF262800571404 /* Assets.xcassets in Resources */,
