@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct Welcome: Decodable {
+let wellcomeUrl = "https://run.mocky.io/v3/35e0d18e-2521-4f1b-a575-f0fe366f66e3"
+
+struct Welcome: DecodableModel {
     let id: Int8
     let name, adress: String
     let minimalPrice: Int32
@@ -16,8 +18,6 @@ struct Welcome: Decodable {
     let ratingName: String
     let imageUrls: [String]
     let aboutTheHotel: AboutTheHotel
-    
-    let wellcomeUrl = "https://run.mocky.io/v3/35e0d18e-2521-4f1b-a575-f0fe366f66e3"
 
     enum CodingKeys: String, CodingKey {
         case id, name, adress

@@ -8,50 +8,55 @@
 import UIKit
 import Alamofire
 
-struct ApiResponse: Codable {
-    let id: String
-    let data: [DataElement]
-    let timestamp: String
-}
-
-struct DataElement: Codable {
-    let field1: String
-    let field2: String
-}
-
-
 class HotelRoomViewComtroller: UIViewController {
+    
+    @IBOutlet weak var hotelRoomTableV: UITableView!
+    
+    var viewModel: HotelRoomViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
-        // Do any additional setup after loading the view.
-    }
-    
-    func fetchData() {
-        let url = "https://run.mocky.io/v3/e8868481-743f-4eb2-a0d7-2bc4012275c8"
+        hotelRoomTableV.dataSource = self
+        hotelRoomTableV.delegate = self
         
-        AF.request(url).validate().responseDecodable(of: ApiResponse.self) { response in
-            switch response.result {
-            case .success(let apiResponse):
-                print("Success: ", apiResponse)
-                
-                // Данные, полученные от API, будут сохранены в переменной apiResponse
-                // Вы можете обработать и использовать эти данные здесь
-                for dataEntry in apiResponse.data {
-                    print("Field1: \(dataEntry.field1), Field2: \(dataEntry.field2)")
-                }
-                
-            case .failure(let error):
-                print("Error occurred: ", error)
+        viewModel = HotelRoomViewModel()
+        viewModel.fetchData {
+            DispatchQueue.main.async {
+                self.hotelRoomTableV.reloadData()
             }
         }
+        
+        
+    }
+    
+    @IBAction func jumpNextScreen(_ sender: Any) {
+        let vc = UIStoryboard(name: "ReservationScreen", bundle: Bundle.main).instantiateViewController(withIdentifier: "ReservationScreen") as? ReservationViewController
+        navigationController?.pushViewController(vc!, animated: true)
+        print("tap")
     }
 }
 
+extension HotelRoomViewComtroller: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.rooms.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HotelRoom", for: indexPath) as! RoomCustomCell
+//        cell.nameRoomL.text = viewModel.rooms[indexPath.row].name
+//        cell.priceL.text = String(viewModel.rooms[indexPath.row].price ?? 0)
+//        cell.pricePer.text = viewModel.rooms[indexPath.row].pricePer
+        let room = viewModel.rooms[indexPath.row]
+        cell.configure(with: room)
+//        print(viewModel.rooms[indexPath.row].name )
+        return cell
+    }
+    
+    
+    
+}
 
-
-/* экран 2
+/* экран 2 HotelRoom
  {
    "rooms": [
      {
@@ -85,7 +90,8 @@ class HotelRoomViewComtroller: UIViewController {
          "https://tour-find.ru/thumb/2/bsb2EIEFA8nm22MvHqMLlw/r/d/screenshot_3_94.png"
        ]
      }
-   ]
+    ]
+ }
 
  */
 
@@ -107,4 +113,8 @@ class HotelRoomViewComtroller: UIViewController {
    "fuel_charge": 9300,
    "service_charge": 2150
  }
+ */
+
+/* экран 5
+ Подтверждение заказа №104893 может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление.
  */

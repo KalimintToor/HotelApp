@@ -18,8 +18,7 @@ class NameHotelViewModel {
     }
     
     func fetchData(completion: @escaping () -> Void) {
-        guard let url = welcomeData?.wellcomeUrl else {return}
-        manager.fetchDataFromAPI(from: url) { [weak self] result in
+        manager.fetchDataFromAPI(from: wellcomeUrl, model: Welcome.self) { [weak self] result,_   in
             switch result {
             case .success(let welcomeData):
                 self?.welcomeData = welcomeData

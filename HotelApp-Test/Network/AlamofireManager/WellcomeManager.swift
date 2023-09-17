@@ -8,27 +8,29 @@
 import Foundation
 import Alamofire
 
-
+protocol DecodableModel: Decodable {}
 
 class WellcomeManager {
     
-    private var welcomeData: Welcome?
+    private var welcomeData: DecodableModel?
     
-    func fetchDataFromAPI(from url: String, completion: @escaping (Result<Welcome, Error>) -> Void) {
+    func fetchDataFromAPI<T: Decodable>(from url: String, model: T.Type, completion: @escaping (Result<T, Error>, [Room]?) -> Void) {
         AF.request(url, method: .get).validate().responseData { response in
             switch response.result {
             case .success(let data):
                 do {
                     let decoder = JSONDecoder()
-                    let welcome = try decoder.decode(Welcome.self, from: data)
-                    self.welcomeData = welcome
-                    completion(.success(welcome))
-                    
+                    let result = try decoder.decode(T.self, from: data)
+                    if let roomList = result as? HotelRoomModel {
+                        completion(.success(result), roomList.rooms)
+                    } else {
+                        completion(.success(result), nil)
+                    }
                 } catch {
-                    completion(.failure(error))
+                    completion(.failure(error), nil)
                 }
             case .failure(let error):
-                completion(.failure(error))
+                completion(.failure(error), nil)
             }
         }
     }

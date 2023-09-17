@@ -17,8 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-        let storyboard = UIStoryboard(name: "HotelRoom", bundle: nil)
-        if let firstViewController = storyboard.instantiateViewController(withIdentifier: "HotelRoom") as? HotelRoomViewComtroller {
+        let storyboard = UIStoryboard(name: "ReservationScreen", bundle: nil) //HotelRoom
+        if let firstViewController = storyboard.instantiateViewController(withIdentifier: "ReservationScreen") as? ReservationViewController { //HotelRoomViewComtroller
             let navigationController = UINavigationController(rootViewController: firstViewController)
             window?.rootViewController = navigationController
             window?.makeKeyAndVisible()
